@@ -20,5 +20,11 @@ df["SPEND_RATIO"] = df["TOTAL_SPEND"]/df["INCOME"]
 # Data Preparation
 x = df.drop("DEFAULT", axis = 1)
 y = df.drop("DEFAULT")
-
+#split
 from sklearn.model_selection import train_test_spit
+x_train, x-test, y_train, y_test = train_test_split(
+    x,
+    y,
+    test_code = 0.2,
+    random_state = 42,
+)
