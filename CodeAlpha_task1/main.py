@@ -6,7 +6,7 @@ from src.models import train_dt
 from src.models import train_rf
 from src.evaluate import evaluate_model
 
-df = pd.read_csv("credit_data.csv")
+df = pd.read_csv("data/credit_data.csv")
 
 #Data exploration
 print(df.head()) 
@@ -16,7 +16,7 @@ print(df.shape)
 
 df = create_features(df)
 
-x_train,x_test, y_train, y_test = preprocess(df)
+x_train,x_test, y_train, y_test, scaler = preprocess(df)
 
 # Understanding Target
 count = df['DEFAULT'].value_counts()
