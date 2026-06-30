@@ -1,12 +1,3 @@
-"""
-Data Loader Module
-
-This module is responsible for:
-1. Finding all audio files
-2. Extracting emotion labels from filenames
-3. Preparing the dataset for feature extraction
-"""
-
 from pathlib import Path
 import pandas as pd
 
@@ -22,20 +13,6 @@ EMOTION_MAP = {
 }
 
 def load_dataset(dataset_path: str) -> pd.DataFrame:
-    """
-    Load the RAVDESS dataset and extract
-    file paths along with their emotion labels.
-
-    Parameters
-    ----------
-    dataset_path : str
-        Path to the RAVDESS dataset.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame containing file paths and emotion labels.
-    """
     records = []
 
     dataset_path = Path(dataset_path)
