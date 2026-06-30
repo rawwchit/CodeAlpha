@@ -1,3 +1,4 @@
+import joblib
 from src.data_loader import load_dataset
 from src.feature_extractor import extract_features
 from src.preprocessing import preprocess
@@ -30,8 +31,13 @@ def main():
 
     X = np.array(X)
     y = np.array(y)
+    
     X_train, X_test, y_train, y_test, label_encoder = preprocess(X, y)
+    print("\nTrain-Test Split")
+    print(f"Training Samples : {len(X_train)}")
+    print(f"Testing Samples  : {len(X_test)}")
     print("\nTraining Random Forest Model...")
+    
     model = train_model(X_train, y_train)
     print("Training Completed!")
     
@@ -41,10 +47,10 @@ def main():
     y_test,
     label_encoder
     )
-
-    print("\nTrain-Test Split")
-    print(f"Training Samples : {len(X_train)}")
-    print(f"Testing Samples  : {len(X_test)}")
+    print("\nSaving Model...")
+    joblib.dump(model, "models/emotion_model.pkl")
+    joblib.dump(label_encoder, "models/label_encoder.pkl")
+    print("Model Saved Successfully!")
 
     print("\nDataset Created Successfully")
     print(f"Feature Matrix Shape : {X.shape}")
@@ -56,3 +62,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    print("\nPipeline Completed Successfully!")
