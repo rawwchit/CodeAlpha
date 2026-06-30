@@ -20,3 +20,36 @@ EMOTION_MAP = {
     "07": "Disgust",
     "08": "Surprised"
 }
+
+def load_dataset(dataset_path: str) -> pd.DataFrame:
+    """
+    Load the RAVDESS dataset and extract
+    file paths along with their emotion labels.
+
+    Parameters
+    ----------
+    dataset_path : str
+        Path to the RAVDESS dataset.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame containing file paths and emotion labels.
+    """
+    records = []
+
+    dataset_path = Path(dataset_path)
+
+    audio_files = dataset_path.rglob("*.wav")
+        
+    for audio_file in audio_files:
+        filename = audio_file.name
+        parts = filename.split("-")
+        emotion_code = parts[2]
+        emotion = EMOTION_MAP[emotion_code]
+        records.append({
+        "filepath": str(audio_file),
+        "emotion": emotion
+    })
+    df = pd.DataFrame(records)
+    return df
